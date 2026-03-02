@@ -34,9 +34,48 @@ def menu_management_flow():
 """Write your main logic execution within this function cart_management_flow()"""
 
 def cart_management_flow():
-    cart=CartManager
-    while:
+    cart_service = CartManager()
+    menu_service = MenuItemManager()
     
+    while True:
+        print("\n" + "="*40)
+        print("          BILLING TERMINAL          ")
+        print("="*40)
+        
+        menu_service.list_items()
+        
+        print("\n--- Current Order ---")
+        current_cart = cart_service.cart
+        if not current_cart:
+            print("[ EMPTY ]")
+        else:
+            for item_id, qty in current_cart.items():
+                name = menu_service.menu_data.get(item_id, {}).get('name', 'Item')
+                print(f"ID {item_id}: {name:<15} x{qty}")
+        
+        print("-" * 40)
+        print("Commands: [ID] [QTY] | 'done' | 'clear'")
+        user_input = input("Action >> ").strip().lower()
+
+        if user_input == 'done':
+            total = cart_service.calculate_total()
+            print(f"\nFinal Bill Total: ${total:.2f}")
+            break
+            
+        if user_input == 'clear':
+            cart_service.cart.clear()
+            continue
+
+        parts = user_input.split()
+        if len(parts) == 2:
+            try:
+                item_id, qty = parts[0], int(parts[1])
+                result = cart_service.update_cart(item_id, qty)
+                print(f"[{result['status'].upper()}] {result['message']}")
+            except ValueError:
+                print("[ERROR] Quantity must be a number.")
+        else:
+            print("[ERROR] Invalid format. Use: 101 2")
 
 def main():
     while True:
@@ -50,7 +89,7 @@ def main():
         if choice == '1':
             menu_management_flow()
         elif choice == '2':
-            print("Billing logic coming soon in cart.py...")
+            cart_management_flow()
         elif choice == '3':
             print("Exiting... Goodbye!")
             break
