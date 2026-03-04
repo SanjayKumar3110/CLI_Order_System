@@ -23,21 +23,21 @@ class MenuItemManager:
         # Persists the current menu_data to the JSON file.
         with open(self.filepath, 'w') as f:
             json.dump(self.menu_data, f, indent=4)
-        print("Menu saved successfully!")
+        print("\nMenu saved successfully!")
 
     def add_item(self, name, price):
         # Adds a new coffee drink to the dynamic list.
         new_id = str(len(self.menu_data) + 1)
         self.menu_data[new_id] = {"name": name, "price": float(price)}
-        print(f"Added: {name} (₹{price:.2f})")
+        print(f"\nAdded: {name} (₹{price:.2f})")
 
     def remove_item(self, item_id):
         # Removes an item by its ID key.
         if item_id in self.menu_data:
             removed = self.menu_data.pop(item_id)
-            print(f"Removed: {removed['name']}")
+            print(f"\nRemoved: {removed['name']}")
         else:
-            print("Error: Item ID not found.")
+            print("\nError: Item ID not found.")
 
     def list_items(self):
         # Displays the menu for the user.

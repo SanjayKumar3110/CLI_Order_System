@@ -24,16 +24,18 @@ class CartManager:
         # Calculates total strictly on item prices[cite: 1].
         return sum(item['subtotal'] for item in self.items.values())
 
-    def display_cart(self):
+    def display_cart(self, show_total=True, label = "Running Total"):
         # Prints the current cart state in the requested format[cite: 6].
         if not self.items:
-            print("=" * 40)
-            print("\n[ Cart is currently empty ]")
+            print("\n--- Current Order ---\n" + f"\n{'[EMPTY]':^44}\n" + "-"*44)
             return
 
-        print("\n| ID | Product          | Qty | Subtotal |")
-        print("-" * 42)
+        print("\n| ID | Product          | Qty | Subtotal  |")
+        print("-" * 44)
+        
         for uid, info in self.items.items():
             print(f"| {uid:<2} | {info['name']:<16} | {info['qty']:<3} | ${info['subtotal']:>8.2f} |")
-        print("-" * 42)
-        print(f"Running Total: ${self.get_total():.2f}")
+        print("-" * 44)
+
+        if show_total:
+            print(f"{label}: ${self.get_total():.2f}")

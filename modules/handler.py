@@ -10,10 +10,10 @@ def menu_management_flow():
         print("3. View Menu")
         print("4. Save and Exit to Main")
         
-        choice = input("Select an option: ")
+        choice = input("\nSelect an option: ")
         
         if choice == '1':
-            name = input("Enter item name: ")
+            name = input("\nEnter item name: ")
             try:
                 price = float(input("Enter price: "))
                 manager.add_item(name, price)
@@ -21,7 +21,7 @@ def menu_management_flow():
                 print("Invalid input. Price must be a number.") # 
         elif choice == '2':
             manager.list_items()
-            item_id = input("Enter ID to remove: ")
+            item_id = input("\nEnter ID to remove: ")
             manager.remove_item(item_id)
         elif choice == '3':
             manager.list_items()
@@ -29,7 +29,7 @@ def menu_management_flow():
             manager.save_menu()
             break
         else:
-            print("Invalid selection. Please try again.")
+            print("\nInvalid selection. Please try again.")
 
 def cart_management_flow():
     menu_mgr = MenuItemManager()
@@ -37,11 +37,10 @@ def cart_management_flow():
     menu = menu_mgr.menu_data
 
     while True:
-        print("\n" + "="*40)
-        print(f"{'BILLING TERMINAL':^40}")
-        print("="*40)
-
         menu_mgr.list_items() # Shows dynamic menu 
+        
+        print("\n" + "="*44 + f"\n{'BILLING TERMINAL':^44}" + "\n" + "="*44)
+
         cart.display_cart()
 
         print("\nOptions: [ID Qty] to Add/Update | [ID]r to Remove | 'D' for Done | 'C' to Cancel")
@@ -58,13 +57,12 @@ def cart_management_flow():
                 continue
             
             # Final Invoice display before exiting loop 
-            print("\n" + "="*40)
-            print(f"{'FINAL INVOICE':^40}")
-            print("="*40)
-            cart.display_cart()
-            print(f"TOTAL PAID: ${cart.get_total():.2f}")
-            print("="*40)
-            input("\nPress Enter to return to main menu...")
+            print("\n" + "="*44 + f"\n{'FINAL INVOICE':^44}\n" + "="*44)
+
+            cart.display_cart(show_total=False)
+
+            print(f"{'GRAND TOTAL:':<30} ${cart.get_total():>8.2f}\n" + "="*44)
+            input("\nOrder Confirmed. Press Enter to return to main menu...\n")
             break
 
         elif action.endswith('r'):
