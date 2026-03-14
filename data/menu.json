@@ -1,0 +1,26 @@
+{
+    "1": {
+        "name": "Tea",
+        "price": 10.0
+    },
+    "2": {
+        "name": "Masala Tea",
+        "price": 15.0
+    },
+    "3": {
+        "name": "Samosa",
+        "price": 8.0
+    },
+    "4": {
+        "name": "Lemon tea",
+        "price": 15.0
+    },
+    "5": {
+        "name": "Coffee",
+        "price": 20
+    },
+    "6": {
+        "name": "vadai",
+        "price": 7.0
+    }
+}
