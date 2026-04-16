@@ -1,6 +1,5 @@
 # This module handles the CRUD operations for the menu.json file. 
 # It ensures that if a user enters a non-numeric price or an invalid ID, the program guides them back rather than crashing
-
 import json
 import os
 
@@ -57,13 +56,8 @@ class MenuItemManager:
         # Adds a new item and auto-saves
         new_id = str(len(self.menu_data) + 1)
         self.menu_data[new_id] = {"name": name.capitalize(), "price": float(price)}
-        self.save_menu() 
+        self.save_menu()
         print(f"\nAdded: {name.capitalize()} (${price:.2f})")
-        
-        # Adds a new coffee drink to the dynamic list.
-        new_id = str(len(self.menu_data) + 1)
-        self.menu_data[new_id] = {"name": name, "price": float(price)}
-        print(f"\nAdded: {name} (₹{price:.2f})")
 
     def remove_item(self, item_id):
         if item_id in self.menu_data:
@@ -82,7 +76,7 @@ class MenuItemManager:
             print(f"\nError: ID {item_id} not found.")
 
     def list_items(self):
-        # Displays the menu for the user[cite: 1, 6].
+        # Displays the menu for the user
         if not self.menu_data:
             print("\n[ Menu is currently empty ]")
             return
